@@ -7,4 +7,8 @@ function clearWhiteSpace(el){
 			node.parentNode.removeChild(node);
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> js

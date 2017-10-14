@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+			.box{
+			    width: 200px;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			.box #for-js{
+			    height: 80px;
+			}
+			.box .for-css1{
+			    overflow : hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+			}
+			.box .for-css2{
+			    position:relative;
+                line-height:1.4em;
+                /* 3 times the line-height to show 3 lines */
+                height:4.2em;
+                overflow:hidden;
+	        }
+            .box .for-css2::after {
+                content:"...";
+                font-weight:bold;
+                position:absolute;
+                bottom:0;
+                right:0;
+                padding:0 20px 1px 45px;
+                background:url(http://newimg88.b0.upaiyun.com/newimg88/2014/09/ellipsis_bg.png) repeat-y;
+            }
+        </style>
+    </head>
+    <body>
+	<br>
+	    WebKit的CSS扩展属性(WebKit是私有属性)-webkit-line-clamp
+		<br><br>
+	    <div class="box">
+		<p class="for-css1">这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本</p>
+        </div><br>
+		跨浏览器兼容的方案
+		<br><br>
+		<div class="box">
+		<p class="for-css2">这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本</p>
+        </div><br>
+		js 实现
+		<br><br>
+        <div class="box">
+		<p id="for-js">这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本</p>
+        </div>
+    </body>
+    <script>
+        var p = document.getElementById('for-js'),
+		    str = p.innerText,
+			n = p.offsetHeight;
+		for (var i = 0, len = str.length; i < len; i++){
+		    p.innerText = str.slice(0, i);
+			if (n < p.scrollHeight){
+			  p.innerText = str.slice(0, i-3) + '...';
+			  break;
+			}
+		}
+		// console.log(p.offsetHeight, p.scrollHeight, str)
+
+    </script>
+</html>
