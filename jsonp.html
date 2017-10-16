@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsonp跨域</title>
+</head>
+<body>
+	<button id="get">获取数据</button>
+	
+</body>
+<script>
+	var btn = document.getElementById('get');
+	btn.addEventListener('click', function(e){
+		var url = 'https://api.douban.com/v2/book/search?',
+		    data = {
+		    	q: 'javascript',
+		    	count: 1
+		    };
+		jsonp(url, data, function(res){
+			console.log(res)
+		})
+	});
+	function jsonp(url, data, callback){
+		var params = '';
+		for (var i in data){
+			params += '&' + i + '=' + data[i];
+		}
+		var script = document.createElement('script');
+		script.src = url + params + '&callback=callback';
+		document.body.insertBefore(script, document.body.firstChild);
+		window.callback = function(res){
+            callback(res);
+        }  
+	}
+</script>
+</html>
