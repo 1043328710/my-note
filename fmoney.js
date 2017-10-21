@@ -10,4 +10,9 @@ function fmoney(money){
 	})
 	return t.split('').reverse().join('') + '.' + r;
 }
+function fmoney2(money){
+	return money.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 fmoney('123456789.256')
+fmoney2('123456789.256')
