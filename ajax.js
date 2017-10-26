@@ -18,7 +18,7 @@ function ajax(opt){
 	xhr.send(format(opt.data));
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState === 4){
-			if(xhr.status === 200 || xhr === 304){ // 304: 请求的资源并没有修改，可以直接使用浏览器中缓存的版本
+			if(xhr.status === 200 || xhr.status === 304){ // 304: 请求的资源并没有修改，可以直接使用浏览器中缓存的版本
 				opt.success(xhr.response);
 			}else{
 				opt.error()
