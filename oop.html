@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/**
+		 * 字面量定义
+		 */
+		var o1 = {name: 'o1'};
+		var o2 = new Object({name: 'o2'});
+		console.log(o1, o2);
+		/**
+		 * 构造函数定义
+		 */
+		function M(name){
+			this.name = name;
+		}
+		var o3 = new M('o3');
+		console.log(o3);
+		/**
+		 * Object.create
+		 */
+		var p = {name: 'o4'};
+		var o4 = Object.create(p);
+		console.log(o4);
+
+		/**
+		 * 借用构造函数继承
+		 * 缺点：Child1无法继承Parent1的原型对象，并没有真正的实现继承（部分继承）
+		 */
+		function Parent1(){
+			this.name = 'Parent1';
+		}
+		function Child1(){
+			this.type = 'Child1';
+			Parent1.call(this);
+		}
+		console.log(new Child1());
+		/**
+		 * 原型链继承
+		 * 缺点：原型对象的属性是共享的
+		 */
+		function Parent2(){
+			this.name = 'Parent2';
+		}
+		function Child2(){
+			this.type = 'Child2';
+		}
+		Child2.prototype = new Parent2();
+		console.log(new Child2());
+		/**
+		 * 组合式继承
+		 */
+		function Parent3(){
+			this.name = 'Parent3';
+		}
+		function Child3(){
+			this.type = 'Child3';
+			Parent3.call(this);
+		}
+		Child3.prototype = Object.create(Parent3.prototype);
+		Child3.prototype.constructor = Child3;
+		console.log(new Child3());
+	</script>
+</body>
+</html>
